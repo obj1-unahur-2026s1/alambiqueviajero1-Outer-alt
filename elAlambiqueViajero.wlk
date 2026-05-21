@@ -12,10 +12,11 @@ object luke {
     }
 
     method viajar(destino) {
-        if (destino.puedeManejarElVehiculo())
-            self.lugaresVisitados() + 1
-            vehiculo.combustible() = vehiculo.combustible() - 10
+        if (destino.puedeManejarElVehiculo()) {
+            lugaresVisitados = lugaresVisitados + 1
+            vehiculo.combustible() - 10
             recuerdoEnCasa = destino.recuerdo()
+        }
     }
 }
 
@@ -26,12 +27,60 @@ object alambiqueVeloz {
 
 }
 
+object superChatarraEspecial {
+    var combustible = 50
+    var municiones = 10
+    var cañonCargado = true
+    var vecesQueSeUsaElCañon = 0
+    method combustible() = combustible  
+    method municiones() = municiones
+    method cañonCargado() =  cañonCargado
+    method vecesQueSeUsaElCañon() = vecesQueSeUsaElCañon
+    method municionesCargadas() {
+        combustible = municiones / combustible
+    }
 
+    method estaCargadoElCañon() {
+        if (municiones > 0 && combustible > 0){
+            cañonCargado = true
+            return true
 
+        }
+        else {
+            cañonCargado = false
+            return false
+        }
+    }
+    
+    method usoDelCañon() {
+        if (self.estaCargadoElCañon()) {
+            municiones -= 1
+            vecesQueSeUsaElCañon += 1
+        }
 
+    }
+}
 
+object laAntiguallaBlindada {
+    var combustible = 100
+    var velocidadDelVehiculo = self.rapido()
+    method velocidadDelVehiculo() = velocidadDelVehiculo
+    method combustible() = combustible
+    method rapido() = 100
+    method lento() = 30 
+}
 
+object superConvertible {
+    var combustible = 200
+    method combustible() = combustible
+    method combertibleASuperChatarra() {
+        combustible = superChatarraEspecial.combustible()
+    }
+    method combertibleALaAntiguaBlindada() {
+        combustible = laAntiguallaBlindada.combustible()
+    }
 
+}
 
     // ========================================================================================================== //
 
@@ -68,4 +117,10 @@ object lasVegas {
     method puedeManejarElVehiculo() = homenaje.puedeManejarElVehiculo()
 }
 
+
+object chaco {
+    var property homenaje = "chaqueño"
+    method recuerdo() = homenaje
+    method puedeManejarElVehiculo() = true
+}
 // ========================================================================================================== //
